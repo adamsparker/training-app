@@ -13,7 +13,8 @@
 
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>MAVERICK PROTOCOL</h3>
+            <div class="sidebar-logo"></div>
+            <h3>ПРОТОКОЛ ГОРЦА</h3>
         </div>
         <ul>
             <li><a href="#" class="nav-link active" data-target="start">Начало</a></li>
@@ -35,9 +36,11 @@
         
         <section id="start" class="page active">
             <h2 data-key="start_title"></h2>
-            <p data-key="start_p1"></p>
+            <p data-key="start_p1"></p> 
             <p data-key="start_p2"></p>
-            <div class="edit-buttons" id="start-edit-buttons"></div>
+            <div class="edit-buttons" id="start-edit-buttons">
+                <button id="btn-download-json" class="btn-add-block" style="background-color: #33a855;" onclick="downloadContent()">Скачать новый content.json</button>
+            </div>
         </section>
 
         <section id="guidelines" class="page">
@@ -49,6 +52,41 @@
                 <p data-key="guidelines_block1_p2"></p>
                 <p data-key="guidelines_block1_p3"></p>
             </div>
+            
+            <div class="guidelines-block">
+                <h3 data-key="guidelines_block2_title"></h3>
+                <p data-key="guidelines_block2_p1"></p>
+                <p data-key="guidelines_block2_p2"></p>
+            </div>
+
+            <div class="guidelines-block">
+                <h3 data-key="guidelines_block3_title"></h3>
+                <p data-key="guidelines_block3_p1"></p>
+            </div>
+
+            <div class="guidelines-block">
+                <h3 data-key="guidelines_block4_title"></h3>
+                <p data-key="guidelines_block4_p1"></p>
+                <p data-key="guidelines_block4_p2"></p>
+                <p data-key="guidelines_block4_p3"></p>
+            </div>
+            
+            <div class="guidelines-block">
+                <h3 data-key="guidelines_block5_title"></h3>
+                <p data-key="guidelines_block5_p1"></p>
+                <p data-key="guidelines_block5_p2"></p>
+                <p data-key="guidelines_block5_p3"></p>
+            </div>
+            
+            <div class="guidelines-block">
+                <h3 data-key="guidelines_block6_title"></h3>
+                <p data-key="guidelines_block6_p1"></p>
+                <p data-key="guidelines_block6_p2"></p>
+                <p data-key="guidelines_block6_p3"></p>
+                <p data-key="guidelines_block6_p4"></p>
+                <p data-key="guidelines_block6_p5"></p>
+            </div>
+
             <div class="guidelines-block">
                 <h3 data-key="guidelines_block7_title"></h3>
                 <p data-key="guidelines_block7_p1"></p>
@@ -59,14 +97,12 @@
         </section>
 
         <div id="program" class="page">
-            <h2 data-key="program_title">Программа тренировок</h2>
-            
-            <div style="margin-bottom: 20px;">
+            <h2 data-key="program_title"></h2> <div style="margin-bottom: 20px;">
                 <button id="toggle-program-edit" class="btn-edit-mode">Редактировать программу</button>
             </div>
         
             <div id="workout-schedule">
-                </div>
+            </div>
         
             <button id="reset-btn" class="btn-reset">Завершить неделю</button>
         </div>
@@ -93,11 +129,9 @@
         <section id="faq" class="page">
             <h2 data-key="faq_title"></h2>
             
-            <h3><span data-key="faq_q1"></span></h3>
-            <p data-key="faq_a1"></p>
+            <h3 data-key="faq_q1"></h3> <p data-key="faq_a1"></p>
             
-            <h3><span data-key="faq_q2"></span></h3>
-            <p data-key="faq_a2"></p>
+            <h3 data-key="faq_q2"></h3> <p data-key="faq_a2"></p>
             <div class="edit-buttons" id="faq-edit-buttons"></div>
         </section>
 

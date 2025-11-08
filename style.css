@@ -69,10 +69,16 @@ p {
     margin-bottom: 30px;
 }
 .sidebar-header h3 {
-    color: var(--accent-color);
+    color: var(--text-primary);
     font-size: 24px;
-    padding-left: 10px;
     margin-bottom: 0; 
+}
+
+.sidebar-logo {
+    height: 200px;
+    width: 130px;
+    background: url(logo.svg) center center no-repeat;
+    background-size: cover;
 }
 
 /* Стили для кнопки редактирования в сайдбаре */
