@@ -1,0 +1,405 @@
+/* --- 1. Глобальные переменные и Сброс --- */
+:root {
+    --bg-primary: #121212;      
+    --bg-secondary: #1e1e1e;   
+    --text-primary: #e0e0e0;   
+    --text-secondary: #aaaaaa; 
+    --accent-color: #a855f7;   
+    --border-color: #333333;   
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex; 
+    height: 100vh;
+    overflow: hidden; 
+}
+
+h1, h2, h3 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+h3 {
+    color: var(--text-primary);
+    margin-top: 15px;
+}
+h2 {
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+/* --- 2. Сайдбар --- */
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out;
+    z-index: 10000;
+}
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    margin-bottom: 30px;
+}
+.sidebar-header h3 {
+    color: var(--accent-color);
+    font-size: 24px;
+    padding-left: 10px;
+    margin-bottom: 0; 
+}
+/* Стили для кнопки редактирования внутри сайдбара */
+.btn-edit-mode {
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: var(--bg-primary); 
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 10px;
+    align-self: flex-start; 
+}
+.btn-edit-mode:hover {
+    background-color: #333;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+.sidebar ul li a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    display: block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+.sidebar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+.sidebar ul li a.active {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+/* --- 3. Контент --- */
+.content {
+    flex-grow: 1;
+    padding: 30px;
+    height: 100vh;
+    overflow-y: auto; 
+    position: relative;
+}
+.page { display: none; }
+.page.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 4. Стили таблицы и кнопки сброса --- */
+
+.program-content {
+    margin-top: 20px;
+}
+
+.workout-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.workout-table th, 
+.workout-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.workout-table th {
+    background-color: var(--bg-secondary);
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.workout-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.checkbox-cell {
+    text-align: center;
+}
+.checkbox-cell input[type="checkbox"] {
+    transform: scale(1.5); 
+    cursor: pointer;
+    accent-color: var(--accent-color);
+}
+
+.btn-reset {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bg-primary);
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+}
+.btn-reset:hover {
+    background-color: #fff;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+}
+
+/* --- 5. Мобильная Адаптация и Меню --- */
+
+.menu-toggle {
+    display: none; 
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--accent-color);
+    z-index: 10001;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+.menu-toggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999; 
+}
+.overlay.active {
+    display: block;
+}
+
+/* Стилизация редактируемых полей */
+[contenteditable="true"] {
+    outline: 2px solid var(--accent-color); 
+    background-color: rgba(168, 85, 247, 0.1); 
+    border-radius: 4px;
+    padding: 2px;
+    display: inline-block; /* Нужно для корректного отображения обводки */
+}
+[contenteditable="true"]:hover {
+    cursor: text;
+}
+
+/* --- 7. Стили для новых кнопок редактирования --- */
+.edit-buttons {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.btn-add-block, .btn-add-row {
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bg-primary);
+    background-color: #2e7d32; 
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-add-block:hover, .btn-add-row:hover {
+    background-color: #4caf50;
+}
+
+/* Стили для кнопок удаления */
+.btn-delete-row, .btn-delete-element {
+    background-color: #d32f2f; 
+    color: #fff;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+}
+.btn-delete-row:hover, .btn-delete-element:hover {
+    background-color: #e53935;
+}
+
+/* Убедимся, что кнопка удаления текстовых блоков находится на той же строке */
+.page [data-key][contenteditable="true"] {
+    display: block; /* Снова делаем блочным для новой строки */
+    position: relative;
+    padding-right: 120px; /* Дополнительное место для кнопки */
+}
+
+/* Позиционирование кнопки удаления текстового блока */
+.btn-delete-element {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+
+/* Медиа-запрос для экранов 768px и меньше */
+@media (max-width: 768px) {
+    /* Сайдбар */
+    .sidebar {
+        position: fixed; 
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 240px; 
+        transform: translateX(-240px); 
+        z-index: 10000; 
+    }
+    .sidebar.visible {
+        transform: translateX(0); 
+        box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+    }
+    
+    /* Кнопка меню */
+    .menu-toggle {
+        display: flex; 
+    }
+    
+    /* Контент */
+    .content {
+        padding: 20px;
+        padding-top: 70px; 
+    }
+    
+    /* Кнопка редактирования - в сайдбаре остается как есть */
+    .btn-edit-mode {
+        margin-top: 0;
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    
+    /* Убираем абсолютное позиционирование для мобильных кнопок удаления текста */
+    .page [data-key][contenteditable="true"] {
+        padding-right: 2px;
+    }
+    .btn-delete-element {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-left: 0;
+        margin-top: 5px;
+        display: block;
+    }
+
+    /* --- МОБИЛЬНЫЙ КАРТОЧНЫЙ ВИД ДЛЯ ТАБЛИЦЫ --- */
+
+    .workout-table, 
+    .workout-table tbody, 
+    .workout-table tr, 
+    .workout-table td {
+        display: block; 
+        width: 100%; 
+    }
+
+    .workout-table thead {
+        display: none; 
+    }
+
+    .workout-table tr {
+        margin-bottom: 15px; 
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background-color: var(--bg-secondary);
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .workout-table td {
+        border: none; 
+        position: relative;
+        padding-left: 50%; 
+        text-align: right; 
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    
+    .workout-table td::before {
+        content: attr(data-label) ": "; 
+        position: absolute;
+        left: 15px; 
+        width: calc(50% - 30px);
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    .workout-table td.checkbox-cell {
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        border-top: 1px solid var(--border-color); 
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+    .workout-table td.checkbox-cell::before {
+        content: "Выполнено: "; 
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+    
+    /* Кнопка удаления строки в мобильной карточке */
+    .btn-delete-row {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        margin: 0;
+    }
+}

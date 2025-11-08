@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя Программа Тренировок</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>FITNESS DASHBOARD</h3>
+            <button id="edit-mode-toggle" class="btn-edit-mode">Включить редактирование</button>
+        </div>
+        <ul>
+            <li><a href="#" class="nav-link active" data-target="start">Начать</a></li>
+            <li><a href="#" class="nav-link" data-target="guidelines">Принципы</a></li>
+            <li><a href="#" class="nav-link" data-target="program">Программа</a></li>
+            <li><a href="#" class="nav-link" data-target="advice">Советы</a></li>
+            <li><a href="#" class="nav-link" data-target="faq">FAQ</a></li>
+        </ul>
+    </aside>
+
+    <main class="content">
+        
+        <button class="menu-toggle" id="menu-toggle">
+            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+        </button>
+        
+        <section id="start" class="page active">
+            <h2 data-key="start_title"></h2>
+            <p data-key="start_p1"></p>
+            <p data-key="start_p2"></p>
+            <div class="edit-buttons" id="start-edit-buttons"></div>
+        </section>
+
+        <section id="guidelines" class="page">
+            <h2 data-key="guidelines_title"></h2>
+            
+            <div class="guidelines-block">
+                <h3 data-key="guidelines_block1_title"></h3>
+                <p data-key="guidelines_block1_p1"></p>
+                <p data-key="guidelines_block1_p2"></p>
+                <p data-key="guidelines_block1_p3"></p>
+            </div>
+            <div class="guidelines-block">
+                <h3 data-key="guidelines_block7_title"></h3>
+                <p data-key="guidelines_block7_p1"></p>
+                <p data-key="guidelines_block7_p2"></p>
+            </div>
+            
+            <div class="edit-buttons" id="guidelines-edit-buttons"></div>
+        </section>
+
+        <div id="program" class="page">
+            <h2 data-key="program_title">Программа тренировок</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <button id="toggle-program-edit" class="btn-edit-mode">Редактировать программу</button>
+            </div>
+        
+            <div id="workout-schedule">
+                </div>
+        
+            <button id="reset-btn" class="btn-reset">Сбросить прогресс</button>
+        </div>
+
+        <section id="advice" class="page">
+            <h2 data-key="advice_title"></h2>
+            
+            <div class="advice-block">
+                <h3 data-key="advice_cardio_title"></h3>
+                <p data-key="advice_cardio_p1"></p>
+                <p data-key="advice_cardio_p2"></p>
+            </div>
+            
+            <div class="advice-block">
+                <h3 data-key="advice_sprints_title"></h3>
+                <p data-key="advice_sprints_p1"></p>
+                <p data-key="advice_sprints_p2"></p>
+            </div>
+            <div class="edit-buttons" id="advice-edit-buttons"></div>
+        </section>
+
+        <section id="faq" class="page">
+            <h2 data-key="faq_title"></h2>
+            
+            <h3><span data-key="faq_q1"></span></h3>
+            <p data-key="faq_a1"></p>
+            
+            <h3><span data-key="faq_q2"></span></h3>
+            <p data-key="faq_a2"></p>
+            <div class="edit-buttons" id="faq-edit-buttons"></div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
