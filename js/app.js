@@ -16,9 +16,32 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Render static content
             contentManager.renderStaticContent();
             
-            // Render workout program
+            // Render main workout program (Протокол Горца)
             if (content.workout_data) {
                 workoutManager.renderWorkoutProgram(content);
+            }
+
+            // Render additional programs from content.json
+            if (content.heavy_duty_workout_data) {
+                workoutManager.renderAdditionalProgram(
+                    content.heavy_duty_workout_data,
+                    'heavy-duty-schedule',
+                    content.heavy_duty_title || 'Heavy Duty Майка Менцера'
+                );
+            }
+            if (content.endurance_workout_data) {
+                workoutManager.renderAdditionalProgram(
+                    content.endurance_workout_data,
+                    'endurance-schedule',
+                    content.endurance_title || 'Endurance Training Дэвида Гоггинса'
+                );
+            }
+            if (content.vtaper_workout_data) {
+                workoutManager.renderAdditionalProgram(
+                    content.vtaper_workout_data,
+                    'vtaper-schedule',
+                    content.vtaper_title || 'V-taper тренировка'
+                );
             }
         }
 
@@ -142,9 +165,33 @@ function setupExportImport() {
                 if (storage.importData(data)) {
                     // Reload content
                     contentManager.loadContent().then(() => {
+                        const content = contentManager.getContent();
                         contentManager.renderStaticContent();
-                        if (contentManager.getContent().workout_data) {
-                            workoutManager.renderWorkoutProgram(contentManager.getContent());
+
+                        if (content && content.workout_data) {
+                            workoutManager.renderWorkoutProgram(content);
+                        }
+
+                        if (content && content.heavy_duty_workout_data) {
+                            workoutManager.renderAdditionalProgram(
+                                content.heavy_duty_workout_data,
+                                'heavy-duty-schedule',
+                                content.heavy_duty_title || 'Heavy Duty Майка Менцера'
+                            );
+                        }
+                        if (content && content.endurance_workout_data) {
+                            workoutManager.renderAdditionalProgram(
+                                content.endurance_workout_data,
+                                'endurance-schedule',
+                                content.endurance_title || 'Endurance Training Дэвида Гоггинса'
+                            );
+                        }
+                        if (content && content.vtaper_workout_data) {
+                            workoutManager.renderAdditionalProgram(
+                                content.vtaper_workout_data,
+                                'vtaper-schedule',
+                                content.vtaper_title || 'V-taper тренировка'
+                            );
                         }
                     });
                 }

@@ -28,6 +28,8 @@ class ContentManager {
 
             if (hasValidSavedContent) {
                 this.content = savedContent;
+                // Дополняем сохранённый контент новыми ключами из DEFAULT_CONTENT (не перезаписывая существующие)
+                this.migrateContentSchema();
                 return this.content;
             }
 
@@ -253,6 +255,22 @@ class ContentManager {
 
     setContent(content) {
         this.content = content;
+    }
+
+    // Добавляем недостающие ключи из DEFAULT_CONTENT в сохранённый контент
+    migrateContentSchema() {
+        if (!window.DEFAULT_CONTENT) return;
+        const defaults = window.DEFAULT_CONTENT;
+
+        Object.keys(defaults).forEach(key => {
+            const current = this.content[key];
+            const isMissing = !(key in this.content);
+            const isEmpty = current === '' || current === null || current === undefined;
+
+            if (isMissing || isEmpty) {
+                this.content[key] = JSON.parse(JSON.stringify(defaults[key]));
+            }
+        });
     }
 }
 

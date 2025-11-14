@@ -44,8 +44,8 @@ class NavigationManager {
         targetPage.classList.add('active');
         targetPage.setAttribute('aria-current', 'page');
 
-        // Close mobile menu if open
-        if (window.innerWidth <= 768) {
+        // Close mobile menu if it is open
+        if (window.innerWidth <= 768 && this.sidebar && this.sidebar.classList.contains('visible')) {
             this.toggleMenu();
         }
 

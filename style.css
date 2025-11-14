@@ -1196,7 +1196,7 @@ body.program-edit-active .workout-table td[contenteditable="true"] {
     .sidebar nav ul li a {
         padding: 12px var(--spacing-md);
         font-size: 0.9375rem;
-        min-height: 44px;
+        height: 100px;
     }
     
     .nav-icon {
@@ -1257,6 +1257,13 @@ body.program-edit-active .workout-table td[contenteditable="true"] {
     .btn-add-row {
         width: 100%;
         margin-top: var(--spacing-sm);
+    }
+}
+
+/* Allow full-page vertical scroll on low-height desktop screens */
+@media (max-height: 800px) {
+    body {
+        overflow-y: auto;
     }
 }
 

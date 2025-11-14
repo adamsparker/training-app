@@ -73,6 +73,60 @@ class WorkoutManager {
         this.attachCheckboxListeners();
     }
 
+    // Render additional static programs (Heavy Duty, Endurance, V-taper) from content
+    renderAdditionalProgram(programData, containerId, ariaPrefix) {
+        const container = document.getElementById(containerId);
+        if (!container || !programData || !programData.days) return;
+
+        let html = '';
+
+        programData.days.forEach((day, dayIndex) => {
+            const safeDayName = Utils.escapeHtml(day.name_ru);
+            const cols = day.columns || { sets: 'Подходы', reps: 'Повторения' };
+
+            html += `
+                <div class="workout-day" data-day="${safeDayName}">
+                    <h3>${safeDayName}</h3>
+                    <table class="workout-table" role="table" aria-label="${Utils.escapeHtml(ariaPrefix)} — ${safeDayName}">
+                        <thead>
+                            <tr>
+                                <th scope="col">Упражнение</th>
+                                <th scope="col">${Utils.escapeHtml(cols.sets)}</th>
+                                <th scope="col">${Utils.escapeHtml(cols.reps)}</th>
+                                <th scope="col">Выполнено</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            (day.exercises || []).forEach((ex, exIndex) => {
+                const id = `cb_${containerId}_d${dayIndex}_e${exIndex}`;
+                html += `
+                    <tr>
+                        <td data-label="Упражнение">${Utils.escapeHtml(ex.name)}</td>
+                        <td data-label="${Utils.escapeHtml(cols.sets)}">${Utils.escapeHtml(ex.sets)}</td>
+                        <td data-label="${Utils.escapeHtml(cols.reps)}">${Utils.escapeHtml(ex.reps)}</td>
+                        <td data-label="Выполнено" class="checkbox-cell">
+                            <input type="checkbox" id="${id}" aria-label="Отметить упражнение ${Utils.escapeHtml(ex.name)} как выполненное">
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+
+        // Подключаем сохранение/загрузку состояния чекбоксов
+        this.loadCheckboxStates();
+        this.attachCheckboxListeners();
+    }
+
     loadCheckboxStates() {
         document.querySelectorAll('.workout-table input[type="checkbox"]').forEach(checkbox => {
             checkbox.checked = storage.loadCheckboxState(checkbox.id);
