@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const menuToggle = document.getElementById('menu-toggle');
-    const resetButton = document.querySelectorAll('.btn-reset');
     const scheduleContainer = document.getElementById('workout-schedule');
     const editModeToggle = document.getElementById('edit-mode-toggle'); 
     const programEditToggle = document.getElementById('toggle-program-edit'); 

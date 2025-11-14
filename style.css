@@ -1,13 +1,49 @@
 /* --- 1. Глобальные переменные и Сброс --- */
 :root {
-    --bg-primary: #121212; /* Очень темный фон */
-    --bg-secondary: #1e1e1e; /* Фон сайдбара/элементов */
-    --text-primary: #e0e0e0; /* Светлый основной текст */
-    --text-secondary: #aaaaaa; /* Второстепенный текст */
-    --accent-color: #a855f7; /* Фиолетовый акцент */
-    --success-color: #2e7d32; /* Зеленый для кнопок добавления */
-    --error-color: #d32f2f; /* Красный для кнопок удаления */
-    --border-color: #333333; /* Границы */
+    /* Монохромная цветовая палитра */
+    --bg-primary: #0f0f0f; /* Глубокий темный фон */
+    --bg-secondary: #1a1a1a; /* Фон сайдбара/элементов */
+    --bg-tertiary: #252525; /* Фон карточек */
+    --bg-elevated: #2a2a2a; /* Приподнятые элементы */
+    
+    --text-primary: #e5e5e5; /* Светлый основной текст */
+    --text-secondary: #a0a0a0; /* Второстепенный текст */
+    --text-muted: #707070; /* Приглушенный текст */
+    
+    /* Монохромные акцентные цвета */
+    --accent-color: #ffffff; /* Белый акцент */
+    --accent-hover: #d0d0d0;
+    
+    /* Монохромные семантические цвета */
+    --success-color: #4a4a4a;
+    --error-color: #5a5a5a;
+    --warning-color: #555555;
+    --info-color: #4f4f4f;
+    
+    /* Границы и разделители */
+    --border-color: #2a2a2a;
+    --border-light: #3a3a3a;
+    --divider: rgba(255, 255, 255, 0.05);
+    
+    /* Тени - минималистичные */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+    
+    /* Радиусы скругления */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -21,176 +57,381 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-primary);
+    background: var(--bg-primary);
     color: var(--text-primary);
     display: flex; 
     height: 100vh;
     overflow: hidden; 
+    line-height: 1.6;
 }
 
 h1, h2, h3 {
     color: var(--text-primary);
-    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
-h3 {
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
     color: var(--text-primary);
-    margin-top: 15px;
 }
+
 h2 {
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+    position: relative;
+    padding-bottom: var(--spacing-md);
     display: inline-block;
 }
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--accent-color);
+    border-radius: 1px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
 p {
-    line-height: 1.7;
-    margin-bottom: 15px;
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
     color: var(--text-secondary);
+    font-size: 1rem;
 }
 
 /* --- 2. Сайдбар --- */
 .sidebar {
-    width: 240px;
+    width: 280px;
     flex-shrink: 0;
-    background-color: var(--bg-secondary);
+    background: var(--bg-secondary);
     border-right: 1px solid var(--border-color);
-    padding: 20px;
+    padding: var(--spacing-xl);
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease;
     z-index: 10000;
+    position: relative;
+    overflow-y: hidden;
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .sidebar-header {
     display: flex;
     flex-direction: column;
-    gap: 10px; 
-    margin-bottom: 30px;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-color);
 }
+
 .sidebar-header h3 {
     color: var(--text-primary);
-    font-size: 24px;
-    margin-bottom: 0; 
+    font-size: 1.75rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
 .sidebar-logo {
-    height: 200px;
-    width: 130px;
+    height: 180px;
+    width: 100%;
     background: url(logo.svg) center center no-repeat;
-    background-size: cover;
+    background-size: contain;
+    border-radius: var(--radius-md);
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.sidebar-logo:hover {
+    opacity: 1;
+}
+
+.sidebar-logo-title {
+    line-height: 1em;
+    text-align: center;
 }
 
 /* Стили для кнопки редактирования в сайдбаре */
 .btn-edit-mode {
-    padding: 8px 15px;
-    font-size: 14px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-primary);
-    background-color: var(--bg-primary); 
+    background: var(--bg-tertiary);
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all 0.2s ease;
-    align-self: flex-start; 
-}
-.btn-edit-mode:hover {
-    background-color: #333;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    align-self: stretch;
+    outline: none;
 }
 
-.sidebar ul {
-    list-style: none;
+.btn-edit-mode:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
 }
-.sidebar ul li a {
+
+.btn-edit-mode:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.btn-edit-mode.active {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border-color: var(--border-light);
+}
+
+.sidebar nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sidebar nav ul li {
+    position: relative;
+}
+
+.sidebar nav ul li a {
     text-decoration: none;
     color: var(--text-secondary);
-    display: block;
-    padding: 12px 15px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 10px var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.15s ease, color 0.15s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
 }
-.sidebar ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.nav-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    opacity: 0.7;
+}
+
+.sidebar nav ul li a:hover {
+    background: var(--bg-tertiary);
     color: var(--text-primary);
 }
-.sidebar ul li a.active {
-    background-color: var(--accent-color);
-    color: var(--bg-primary);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+
+.sidebar nav ul li a:hover .nav-icon svg {
+    opacity: 1;
+}
+
+.sidebar nav ul li a.active {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.sidebar nav ul li a.active .nav-icon svg {
+    opacity: 1;
+}
+
+.sidebar nav ul li a:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-md);
 }
 
 /* --- 3. Контент --- */
 .content {
     flex-grow: 1;
-    padding: 30px;
+    padding: var(--spacing-2xl);
     height: 100vh;
     overflow-y: auto; 
     position: relative;
+    scroll-behavior: smooth;
 }
-.page { display: none; }
+
+.content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: var(--radius-sm);
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    background: var(--border-light);
+}
+
+.page { 
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 .page.active {
     display: block;
-    animation: fadeIn 0.4s ease;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- 4. Стили таблицы и кнопки сброса --- */
 
 .program-content {
-    margin-top: 20px;
+    margin-top: var(--spacing-xl);
+}
+
+.workout-day {
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.15s ease;
+    position: relative;
+}
+
+.workout-day:hover {
+    border-color: var(--border-light);
+}
+
+.workout-day h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+.workout-day h3::before {
+    display: none;
 }
 
 .workout-table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: var(--spacing-lg);
+    background: transparent;
+    border-radius: var(--radius-md);
+    overflow: visible;
 }
+
 .workout-table th, 
 .workout-table td {
-    border: 1px solid var(--border-color);
-    padding: 12px 15px;
+    padding: var(--spacing-lg);
     text-align: left;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .workout-table th {
-    background-color: var(--bg-secondary);
-    color: var(--accent-color);
+    background: var(--bg-elevated);
+    color: var(--text-primary);
     font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.workout-table tbody tr {
+    transition: all 0.2s ease;
+    background: transparent;
+    position: relative;
+}
+
+.workout-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .workout-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.03);
+    background: var(--bg-tertiary);
+}
+
+.workout-table tbody tr:focus-within {
+    background: var(--bg-tertiary);
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
 }
 
 .checkbox-cell {
     text-align: center;
 }
+
 .checkbox-cell input[type="checkbox"] {
-    transform: scale(1.5); 
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     accent-color: var(--accent-color);
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+/* Preserve table layout when editing workout program */
+body.program-edit-active .workout-table td[contenteditable="true"] {
+    display: table-cell;
+    padding: var(--spacing-lg);
+}
+
+.checkbox-cell input[type="checkbox"]:checked {
+    opacity: 1;
 }
 
 .btn-reset {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--bg-primary);
-    background-color: var(--accent-color);
-    border: none;
-    border-radius: 8px;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
+
 .btn-reset:hover {
-    background-color: #fff;
-    box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
+}
+
+.btn-reset:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 .empty-button-mode {
@@ -202,22 +443,34 @@ p {
 .menu-toggle {
     display: none; 
     position: fixed;
-    top: 15px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background-color: var(--bg-secondary);
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 48px;
+    height: 48px;
+    background: var(--bg-tertiary);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     color: var(--accent-color);
     z-index: 10001;
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
+
+.menu-toggle:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
+}
+
 .menu-toggle svg {
     width: 24px;
     height: 24px;
+}
+
+.menu-toggle:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 .overlay {
@@ -237,51 +490,246 @@ p {
 /* --- 6. Стилизация редактируемых полей и кнопок --- */
 [contenteditable="true"] {
     outline: 2px solid var(--accent-color); 
-    background-color: rgba(168, 85, 247, 0.1); 
-    border-radius: 4px;
-    padding: 2px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    padding: 2px 4px;
     display: inline-block; 
+    transition: background-color 0.15s ease;
+    border: 1px solid var(--border-color);
 }
+
 [contenteditable="true"]:hover {
     cursor: text;
+    background: var(--bg-elevated);
+}
+
+[contenteditable="true"]:focus {
+    background: var(--bg-elevated);
+    border-color: var(--accent-color);
+}
+
+.guidelines-block {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.15s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.guidelines-block::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent-color);
+    border-top-left-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
+}
+
+.guidelines-block:hover {
+    border-color: var(--border-light);
+}
+
+.guidelines-block h3 {
+    margin-top: 0;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.guidelines-block h3::before {
+    display: none;
+}
+
+.advice-block {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.15s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.advice-block::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent-color);
+    border-top-left-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
+}
+
+.advice-block:hover {
+    border-color: var(--border-light);
+}
+
+.advice-block h3 {
+    margin-top: 0;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+}
+
+.advice-block h3::before {
+    display: none;
+}
+
+/* FAQ стили */
+#faq h3 {
+    color: var(--text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+}
+
+#faq h3::before {
+    display: none;
+}
+
+#faq p {
+    margin-bottom: var(--spacing-xl);
+    padding-left: var(--spacing-lg);
+    border-left: 2px solid var(--border-color);
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+#faq p:hover {
+    border-left-color: var(--border-light);
+    background: var(--bg-elevated);
+}
+
+/* Start page media container */
+.start-media {
+    /* margin: var(--spacing-xl) 0; */
+    width: 100%;
+    min-height: 300px;
+    background: url(img/my-photo.jpg) center center no-repeat;
+    background-size: cover;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.start-media img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .edit-buttons {
-    margin: 20px 0;
+    margin: var(--spacing-xl) 0;
     display: flex;
-    gap: 10px;
+    gap: var(--spacing-md);
     flex-wrap: wrap;
 }
 .btn-add-block, .btn-add-row, #btn-add-day {
-    padding: 8px 15px;
-    font-size: 14px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 0.875rem;
     font-weight: 600;
-    color: var(--bg-primary);
-    background-color: var(--success-color); 
-    border: none;
-    border-radius: 6px;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
+
 .btn-add-block:hover, .btn-add-row:hover, #btn-add-day:hover {
-    background-color: #4caf50;
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
+}
+
+.btn-add-block:focus-visible, .btn-add-row:focus-visible, #btn-add-day:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.add-block-button {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px dashed var(--border-light);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    opacity: 0.85;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease, transform 0.1s ease;
+}
+
+.add-block-button svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.add-block-button span {
+    white-space: nowrap;
+}
+
+.add-block-button:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--accent-color);
+    color: var(--text-primary);
+    opacity: 1;
+}
+
+.add-block-button:active {
+    transform: translateY(1px);
+}
+
+.add-block-button:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 /* Стили для кнопок удаления */
 .btn-delete-row, .btn-delete-element {
-    background-color: var(--error-color); 
-    color: #fff;
-    padding: 5px 10px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 4px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-left: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.2s ease;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
     flex-shrink: 0;
 }
+
 .btn-delete-row:hover, .btn-delete-element:hover {
-    background-color: #e53935;
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
+}
+
+.btn-delete-row:focus-visible, .btn-delete-element:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 /* Позиционирование кнопки удаления текстового блока (десктоп) */
@@ -309,6 +757,42 @@ p {
     .empty-button-mode {
         display: unset;
     }
+    
+    /* Скрываем все элементы редактирования на мобильных */
+    #toggle-program-edit {
+        display: none !important;
+    }
+    
+    .btn-edit-mode {
+        display: none !important;
+    }
+    
+    /* Скрываем все кнопки редактирования на мобильных */
+    #guidelines-edit-buttons,
+    #advice-edit-buttons,
+    #faq-edit-buttons,
+    #start-edit-buttons {
+        display: none !important;
+    }
+    
+    .btn-add-row-modern,
+    .btn-add-day-modern,
+    .btn-delete-row-modern,
+    .btn-edit-item,
+    .btn-delete-item {
+        display: none !important;
+    }
+    
+    /* Скрываем индикатор режима редактирования */
+    body.edit-mode-active::before,
+    body.program-edit-active::before {
+        display: none !important;
+    }
+    
+    /* Убираем hover эффекты редактирования */
+    .editable-item:hover {
+        outline: none !important;
+    }
 
     /* Сайдбар */
     .sidebar {
@@ -316,31 +800,82 @@ p {
         left: 0;
         top: 0;
         height: 100%;
-        width: 240px; 
-        transform: translateX(-240px); 
+        width: 280px; 
+        transform: translateX(-280px); 
         z-index: 10000; 
+        box-shadow: none;
     }
     .sidebar.visible {
         transform: translateX(0); 
-        box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+        box-shadow: var(--shadow-xl);
     }
     
     /* Кнопка меню */
     .menu-toggle {
         display: flex; 
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
     }
     
     /* Контент */
     .content {
-        padding: 20px;
+        padding: var(--spacing-md);
         padding-top: 70px; 
+    }
+    
+    .page {
+        max-width: 100%;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-lg);
+        margin-top: var(--spacing-lg);
+    }
+    
+    h3 {
+        font-size: 1.125rem;
+        margin-top: var(--spacing-lg);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    p {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        margin-bottom: var(--spacing-md);
     }
     
     /* Кнопки редактирования */
     .btn-edit-mode {
         margin-top: 0;
-        font-size: 12px;
-        padding: 5px 10px;
+        font-size: 0.875rem;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    /* Улучшенные блоки контента */
+    .guidelines-block,
+    .advice-block {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+        border-radius: var(--radius-md);
+    }
+    
+    /* Улучшенные кнопки для touch */
+    .btn-reset,
+    .btn-add-block,
+    .btn-add-row,
+    #btn-add-day {
+        padding: 14px var(--spacing-lg);
+        font-size: 0.9375rem;
+        min-height: 44px;
+        touch-action: manipulation;
     }
     
     /* Убираем абсолютное позиционирование для мобильных кнопок удаления текста */
@@ -352,11 +887,26 @@ p {
         top: auto;
         right: auto;
         margin-left: 0;
-        margin-top: 5px;
+        margin-top: var(--spacing-sm);
         display: block;
+        min-height: 44px;
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 
-    /* --- МОБИЛЬНЫЙ КАРТОЧНЫЙ ВИД ДЛЯ ТАБЛИЦЫ --- */
+    /* --- УЛУЧШЕННЫЙ МОБИЛЬНЫЙ КАРТОЧНЫЙ ВИД ДЛЯ ТАБЛИЦЫ --- */
+
+    .workout-day {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+        border-radius: var(--radius-md);
+    }
+    
+    .workout-day h3 {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-md);
+        padding-bottom: var(--spacing-sm);
+        border-bottom: 1px solid var(--border-color);
+    }
 
     .workout-table thead {
         display: none; 
@@ -364,83 +914,933 @@ p {
 
     .workout-table, 
     .workout-table tbody, 
-    .workout-table tr, 
-    .workout-table td {
+    .workout-table tr {
         display: block; 
         width: 100%; 
     }
+    
+    .workout-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
 
     .workout-table tr {
-        margin-bottom: 15px; 
+        margin-bottom: 0;
         border: 1px solid var(--border-color);
-        border-radius: 10px; /* Улучшенное скругление */
-        background-color: #252525; /* Фон карточки, слегка светлее BG */
-        padding: 15px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+        border-radius: var(--radius-md);
+        background: var(--bg-tertiary);
+        padding: var(--spacing-md);
+        box-shadow: var(--shadow-sm);
         position: relative; 
+        transition: border-color 0.15s ease, background-color 0.15s ease;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
     }
     
-    /* --- Стилизация ячеек и подписей (data-label) --- */
+    .workout-table tr:active {
+        background: var(--bg-elevated);
+        border-color: var(--border-light);
+    }
+    
+    /* Визуальное разделение между карточками */
+    .workout-table tbody tr + tr {
+        margin-top: 0;
+    }
 
+    /* Улучшенная стилизация ячеек */
     .workout-table td {
         border: none; 
-        position: relative;
-        padding-left: 55%; /* Увеличенный отступ для подписи */
-        text-align: right; 
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding: 0;
+        padding-top: var(--spacing-xs);
+        padding-bottom: var(--spacing-xs);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-sm);
+        width: 100%;
     }
     
-    .workout-table td::before {
-        content: attr(data-label) ": "; 
-        position: absolute;
-        left: 15px; 
-        width: calc(55% - 30px);
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: 700; /* Более жирный шрифт для акцента */
-        color: var(--accent-color);
+    .workout-table td:first-child {
+        padding-top: 0;
+        padding-bottom: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-color);
+        display: block;
+        width: 100%;
+    }
+    
+    .workout-table td:first-child::before {
+        display: none;
+    }
+    
+    .workout-table td:not(:first-child):not(.checkbox-cell)::before {
+        content: attr(data-label);
+        font-weight: 500;
+        font-size: 0.8125rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        flex-shrink: 0;
+        min-width: 90px;
+    }
+    
+    .workout-table td:not(:first-child):not(.checkbox-cell) {
+        text-align: right;
+        font-size: 0.9375rem;
+        color: var(--text-primary);
+        font-weight: 500;
     }
 
     /* Улучшение отображения редактируемых полей внутри карточки */
     .workout-table tr [contenteditable="true"] {
-        padding: 1px 5px;
-        display: inline-block;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
     }
 
-    /* --- Стилизация чекбокса (самая удобная часть) --- */
+    /* --- Улучшенная стилизация чекбокса --- */
     
     .workout-table td.checkbox-cell {
-        display: flex; /* Flexbox для удобного размещения */
-        justify-content: space-between; /* Разносим текст и чекбокс по краям */
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        text-align: left;
-        padding-left: 15px; 
-        padding-right: 15px;
+        padding: var(--spacing-sm) 0 0 0;
+        margin-top: var(--spacing-xs);
         border-top: 1px solid var(--border-color); 
-        margin-top: 10px;
-        padding-top: 10px;
-    }
-    .workout-table td.checkbox-cell::before {
-        content: "Выполнено"; 
-        position: static; 
-        width: auto;
-        font-weight: 600;
-        color: var(--text-primary);
-    }
-    .workout-table td.checkbox-cell input[type="checkbox"] {
-        margin-right: 0;
+        padding-top: var(--spacing-sm);
     }
     
-    /* --- Стилизация кнопки удаления строки --- */
-
+    .workout-table td.checkbox-cell::before {
+        content: "Выполнено"; 
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        text-transform: none;
+        letter-spacing: 0;
+    }
+    
+    .workout-table td.checkbox-cell input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+        margin: 0;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+    
+    /* --- Улучшенная стилизация кнопки удаления строки --- */
     .btn-delete-row {
         position: absolute;
-        top: 10px; /* Позиционируем в верхнем правом углу карточки */
-        right: 10px;
+        top: var(--spacing-sm);
+        right: var(--spacing-sm);
         margin: 0;
         z-index: 5; 
-        padding: 5px 8px; 
+        padding: 8px 12px;
+        min-height: 36px;
+        font-size: 0.75rem;
+        border-radius: var(--radius-sm);
+    }
+    
+    /* Улучшенные карточки для guidelines и advice */
+    .guidelines-block,
+    .advice-block {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .guidelines-block h3,
+    .advice-block h3 {
+        font-size: 1.125rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    /* FAQ улучшения */
+    #faq h3 {
+        font-size: 1.125rem;
+        margin-top: var(--spacing-lg);
+    }
+    
+    #faq p {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+        border-radius: var(--radius-md);
+        font-size: 0.9375rem;
+    }
+    
+    /* Улучшенный sidebar на мобильных */
+    .sidebar {
+        padding: var(--spacing-md);
+    }
+    
+    .sidebar-header {
+        margin-bottom: var(--spacing-lg);
+        padding-bottom: var(--spacing-md);
+    }
+    
+    .sidebar-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .sidebar-logo {
+        height: 120px;
+    }
+    
+    .sidebar nav ul li a {
+        padding: 12px var(--spacing-md);
+        font-size: 0.9375rem;
+        min-height: 44px;
+    }
+    
+    .nav-icon {
+        width: 22px;
+        height: 22px;
+    }
+    
+    /* Улучшенные кнопки в программе */
+    #toggle-program-edit {
+        width: 100%;
+        min-height: 44px;
+        margin-bottom: var(--spacing-md);
+        font-size: 0.9375rem;
+    }
+    
+    #reset-btn {
+        width: 100%;
+        min-height: 44px;
+        margin-top: var(--spacing-lg);
+        font-size: 1rem;
+    }
+    
+    /* Улучшенные edit-buttons */
+    .edit-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .edit-buttons button {
+        width: 100%;
+        min-height: 44px;
+        font-size: 0.9375rem;
+    }
+    
+    /* Улучшенные workout-day карточки */
+    .workout-day {
+        box-shadow: var(--shadow-sm);
+    }
+    
+    /* Улучшенная визуальная иерархия */
+    .program-content {
+        margin-top: var(--spacing-md);
+    }
+    
+    /* Улучшенные отступы для лучшей читаемости */
+    .page {
+        padding-bottom: var(--spacing-xl);
+    }
+    
+    /* Улучшенная кнопка добавления дня */
+    #btn-add-day {
+        width: 100%;
+        margin-top: var(--spacing-md);
+    }
+    
+    /* Улучшенные кнопки добавления упражнений */
+    .btn-add-row {
+        width: 100%;
+        margin-top: var(--spacing-sm);
+    }
+}
+
+/* --- 8. Toast Notifications --- */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    min-width: 300px;
+    max-width: 500px;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    color: var(--text-primary);
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    border: 1px solid var(--border-color);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-success {
+    background: var(--bg-tertiary);
+    border-left: 2px solid var(--accent-color);
+}
+
+.toast-error {
+    background: var(--bg-tertiary);
+    border-left: 2px solid var(--accent-color);
+}
+
+.toast-warning {
+    background: var(--bg-tertiary);
+    border-left: 2px solid var(--accent-color);
+}
+
+.toast-info {
+    background: var(--bg-tertiary);
+    border-left: 2px solid var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .toast-container {
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+        left: var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+    .toast {
+        min-width: auto;
+        max-width: 100%;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 0.9375rem;
+    }
+    
+    /* Улучшенные модальные окна */
+    .modal {
+        margin: var(--spacing-md);
+        padding: var(--spacing-lg);
+        min-width: auto;
+        max-width: calc(100% - 32px);
+    }
+    
+    .modal-input {
+        font-size: 16px; /* Предотвращает zoom на iOS */
+        padding: 14px;
+        min-height: 44px;
+    }
+    
+    .modal-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .btn-modal {
+        width: 100%;
+        min-height: 44px;
+        padding: 14px var(--spacing-lg);
+    }
+}
+
+/* --- 9. Modal Dialog --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+}
+
+.modal {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    min-width: 300px;
+    max-width: 500px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+.modal h3 {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    font-size: 20px;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.modal-input:focus {
+    border-color: var(--accent-color);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.btn-modal:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-primary:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
+}
+
+.btn-secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
+}
+
+
+/* --- 10. Loading Indicator --- */
+.loading-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100001;
+    gap: 20px;
+}
+
+.loading-indicator p {
+    color: var(--text-primary);
+    font-size: 18px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--accent-color);
+    border-right-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- 11. Accessibility Improvements --- */
+*:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+button, a, input, [contenteditable="true"] {
+    transition: all 0.2s ease;
+}
+
+/* Skip to main content link for screen readers */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent-color);
+    color: var(--bg-primary);
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100002;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Better contrast for better readability */
+.workout-table td, .workout-table th {
+    transition: background-color 0.2s;
+}
+
+.workout-table tbody tr:focus-within {
+    background-color: rgba(168, 85, 247, 0.1);
+}
+
+/* Improved button states */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+button:not(:disabled):active {
+    transform: scale(0.98);
+}
+
+/* --- 12. Modern Edit Mode Styles --- */
+
+/* Edit mode indicator */
+body.edit-mode-active::before,
+body.program-edit-active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-color);
+    z-index: 100000;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Editable items */
+.editable-item {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.editable-item:hover {
+    outline: 1px dashed var(--border-light);
+    outline-offset: 4px;
+}
+
+.editable-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+/* Edit buttons on hover */
+.btn-edit-item,
+.btn-delete-item {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.2s ease;
+    z-index: 10;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-delete-item {
+    top: 48px;
+    background: var(--error-color);
+    border-color: var(--error-color);
+}
+
+.editable-item:hover .btn-edit-item,
+.editable-item:hover .btn-delete-item {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn-edit-item:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--border-light);
+    transform: scale(1.05);
+}
+
+.btn-delete-item:hover {
+    background: var(--error-color);
+    border-color: var(--error-color);
+    transform: scale(1.05);
+}
+
+.btn-edit-item svg,
+.btn-delete-item svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Edit buttons container */
+.edit-buttons {
+    display: none;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.edit-buttons.visible {
+    display: flex;
+}
+
+.edit-buttons .btn-add-block {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.edit-buttons .btn-add-block svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Modern edit modal */
+.edit-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    padding: var(--spacing-md);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.edit-modal {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-xl);
+    animation: slideUp 0.3s ease;
+    overflow: hidden;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.edit-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.edit-modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.edit-modal-close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.edit-modal-close:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.edit-modal-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+.edit-modal-body {
+    padding: var(--spacing-lg);
+    flex: 1;
+    overflow-y: auto;
+}
+
+.edit-modal-textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    resize: vertical;
+    min-height: 120px;
+    transition: all 0.2s ease;
+}
+
+.edit-modal-textarea:focus {
+    outline: none;
+    border-color: var(--border-light);
+    background: var(--bg-elevated);
+}
+
+.edit-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.edit-modal-confirm .edit-modal-body p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.btn-danger {
+    background: var(--error-color) !important;
+    border-color: var(--error-color) !important;
+}
+
+.btn-danger:hover {
+    background: var(--error-color) !important;
+    border-color: var(--error-color) !important;
+    opacity: 0.9;
+}
+
+/* Modern program edit buttons */
+.btn-add-day-modern,
+.btn-add-row-modern {
+    display: none;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: var(--spacing-md) 0;
+}
+
+.btn-add-day-modern.visible,
+.btn-add-row-modern.visible {
+    display: flex;
+}
+
+.btn-add-day-modern:hover,
+.btn-add-row-modern:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-light);
+}
+
+.btn-add-day-modern svg,
+.btn-add-row-modern svg {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-delete-row-modern {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: var(--error-color);
+    border: 1px solid var(--error-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.workout-table tbody tr:hover .btn-delete-row-modern {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn-delete-row-modern:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.btn-delete-row-modern svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Drag and drop indicators */
+.draggable {
+    cursor: grab;
+}
+
+.draggable:active {
+    cursor: grabbing;
+}
+
+.draggable::before {
+    content: '⋮⋮';
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 0.5;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.editable-item:hover.draggable::before {
+    opacity: 1;
+}
+
+/* Mobile styles for edit mode */
+@media (max-width: 768px) {
+    .edit-modal {
+        max-width: 100%;
+        max-height: 95vh;
+        border-radius: var(--radius-md);
+    }
+
+    .edit-modal-header,
+    .edit-modal-body,
+    .edit-modal-footer {
+        padding: var(--spacing-md);
+    }
+
+    .edit-modal-textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    .btn-edit-item,
+    .btn-delete-item {
+        width: 36px;
+        height: 36px;
+        top: 4px;
+        right: 4px;
+        opacity: 1; /* Always visible on mobile */
+    }
+
+    .btn-delete-item {
+        top: 44px;
+    }
+
+    .btn-edit-item svg,
+    .btn-delete-item svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .edit-buttons {
+        flex-direction: column;
+    }
+
+    .edit-buttons .btn-add-block {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .draggable::before {
+        display: none; /* Hide drag handle on mobile */
+    }
+
+    .btn-add-day-modern,
+    .btn-add-row-modern {
+        width: 100%;
+        justify-content: center;
     }
 }

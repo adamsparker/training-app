@@ -3,43 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя Программа Тренировок</title>
+    <meta name="description" content="Программа тренировок ПРОТОКОЛ ГОРЦА - эффективная система для роста мышц и силы">
+    <title>ПРОТОКОЛ ГОРЦА - Моя Программа Тренировок</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay" aria-hidden="true"></div>
 
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Основная навигация">
         <div class="sidebar-header">
-            <div class="sidebar-logo"></div>
-            <h3>ПРОТОКОЛ ГОРЦА</h3>
+            <div class="sidebar-logo" aria-hidden="true"></div>
+            <h3 class="sidebar-logo-title">ПРОТОКОЛ ГОРЦА</h3>
         </div>
-        <ul>
-            <li><a href="#" class="nav-link active" data-target="start">Начало</a></li>
-            <li><a href="#" class="nav-link" data-target="guidelines">Принципы тренировок</a></li>
-            <li><a href="#" class="nav-link" data-target="program">Программа</a></li>
-            <li><a href="#" class="nav-link" data-target="advice">Советы</a></li>
-            <li><a href="#" class="nav-link" data-target="faq">Часто задаваемые вопросы</a></li>
-        </ul>
-    <button id="edit-mode-toggle" class="btn-edit-mode">Включить редактирование</button>
-    <div class="empty-button-mode"></div>
-
+        <nav>
+            <ul role="list">
+                <li>
+                    <a href="#" class="nav-link active" data-target="start" aria-current="page">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                            </svg>
+                        </span>
+                        <span>Начало</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="guidelines">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"/>
+                            </svg>
+                        </span>
+                        <span>Принципы тренировок</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="program">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"/>
+                            </svg>
+                        </span>
+                        <span>Программа</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="advice">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+                            </svg>
+                        </span>
+                        <span>Советы</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-target="faq">
+                        <span class="nav-icon">
+                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"/>
+                            </svg>
+                        </span>
+                        <span>Часто задаваемые вопросы</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <button id="edit-mode-toggle" class="btn-edit-mode" aria-label="Включить режим редактирования контента">Включить редактирование</button>
+        <div class="empty-button-mode" aria-hidden="true"></div>
     </aside>
 
-    <main class="content">
-        
-        <button class="menu-toggle" id="menu-toggle">
-            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+    <main class="content" role="main">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню навигации" aria-expanded="false">
+            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            </svg>
         </button>
         
-        <section id="start" class="page active">
-            <h2 data-key="start_title"></h2>
+        <section id="start" class="page active" aria-labelledby="start-heading">
+            <div class="start-media" id="start-media" aria-label="Контейнер для изображения"></div>
+            <h2 id="start-heading" data-key="start_title"></h2>
             <p data-key="start_p1"></p> 
             <p data-key="start_p2"></p>
-            <div class="edit-buttons" id="start-edit-buttons">
-                <button id="btn-download-json" class="btn-add-block" style="background-color: #33a855;" onclick="downloadContent()">Скачать новый content.json</button>
+            <div class="edit-buttons" id="start-edit-buttons" role="group" aria-label="Действия с данными">
+                <button id="btn-download-json" class="btn-add-block" onclick="downloadContent()" aria-label="Скачать резервную копию данных">Скачать резервную копию</button>
             </div>
         </section>
 
@@ -96,15 +145,16 @@
             <div class="edit-buttons" id="guidelines-edit-buttons"></div>
         </section>
 
-        <div id="program" class="page">
-            <h2 data-key="program_title"></h2> <div style="margin-bottom: 20px;">
-                <button id="toggle-program-edit" class="btn-edit-mode">Редактировать программу</button>
+        <div id="program" class="page" aria-labelledby="program-heading">
+            <h2 id="program-heading" data-key="program_title"></h2>
+            <div style="margin-bottom: 20px;">
+                <button id="toggle-program-edit" class="btn-edit-mode" aria-label="Редактировать программу тренировок">Редактировать программу</button>
             </div>
         
-            <div id="workout-schedule">
+            <div id="workout-schedule" role="region" aria-label="Расписание тренировок">
             </div>
         
-            <button id="reset-btn" class="btn-reset">Завершить неделю</button>
+            <button id="reset-btn" class="btn-reset" aria-label="Сбросить прогресс тренировки">Завершить неделю</button>
         </div>
 
 
@@ -137,6 +187,16 @@
 
     </main>
 
-    <script src="app.js"></script>
+    <!-- Scripts in order of dependencies -->
+    <script src="js/utils.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/defaultContent.js"></script>
+    <script src="js/content.js"></script>
+    <script src="js/workout.js"></script>
+    <script src="js/editMode.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
