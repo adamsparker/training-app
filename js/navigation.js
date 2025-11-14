@@ -103,7 +103,7 @@ class NavigationManager {
                 const num = parseInt(e.key);
                 if (num >= 1 && num <= 5) {
                     e.preventDefault();
-                    const pages = ['start', 'guidelines', 'program', 'advice', 'faq'];
+                    const pages = ['start', 'guidelines', 'programs', 'advice', 'faq'];
                     if (pages[num - 1]) {
                         this.navigateTo(pages[num - 1]);
                     }

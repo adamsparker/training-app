@@ -50,6 +50,27 @@ function setupEventListeners() {
         });
     }
 
+    // Program cards navigation from "Программы тренировок" к конкретным программам
+    const programCards = document.querySelectorAll('.program-card');
+    if (programCards.length && window.navigation) {
+        const programPageById = {
+            gorca: 'program-gorca',
+            'heavy-duty': 'program-heavy-duty',
+            endurance: 'program-endurance',
+            vtaper: 'program-vtaper'
+        };
+
+        programCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const programId = card.getAttribute('data-program-id');
+                const pageId = programPageById[programId];
+                if (pageId) {
+                    navigation.navigateTo(pageId);
+                }
+            });
+        });
+    }
+
     // Auto-save on content edit (debounced)
     const debouncedSave = Utils.debounce(() => {
         if (editMode.isContentEditing || editMode.isProgramEditing) {
