@@ -9,9 +9,8 @@ class WorkoutManager {
         if (!content.workout_data || !this.scheduleContainer) return;
 
         let html = '';
-        this.checkboxIndex = 1;
 
-        content.workout_data.days.forEach((day) => {
+        content.workout_data.days.forEach((day, dayIndex) => {
             const safeName = Utils.escapeHtml(day.name_ru);
             const deleteDayBtn = `
                 <button class="btn-delete-row btn-delete-day" style="float:right; margin-top: -5px;" 
@@ -44,8 +43,8 @@ class WorkoutManager {
                             <tbody>
             `;
 
-            day.exercises.forEach((ex) => {
-                const id = `ex${this.checkboxIndex++}`;
+            day.exercises.forEach((ex, exIndex) => {
+                const id = `cb_d${dayIndex}_e${exIndex}`;
                 html += `
                     <tr>
                         <td data-label="Упражнение">${Utils.escapeHtml(ex.name)}</td>
@@ -102,11 +101,18 @@ class WorkoutManager {
 
     resetProgress() {
         const checkboxes = document.querySelectorAll('.workout-table input[type="checkbox"]');
+
+        // Снимаем все чекбоксы на странице
         checkboxes.forEach(checkbox => {
             checkbox.checked = false;
-            storage.saveCheckboxState(checkbox.id, false);
         });
+
+        // Полностью очищаем сохранённые состояния чекбоксов в localStorage
+        storage.clearAllCheckboxes();
+
+        // Обновляем статистику
         storage.updateStats(true);
+
         notifications.success('Прогресс тренировки сброшен');
     }
 
