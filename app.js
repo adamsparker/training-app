@@ -2,6 +2,41 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Function to handle program card clicks
+    function handleProgramCardClick(event) {
+        event.preventDefault();
+        const card = event.currentTarget;
+        const programId = card.getAttribute('data-program-id');
+        if (programId) {
+            const targetPage = document.getElementById(`program-${programId}`);
+            if (targetPage) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                // Show target page
+                targetPage.classList.add('active');
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    }
+
+    // Function to handle program card touch/click events
+    function initProgramCards() {
+        const programCards = document.querySelectorAll('.program-card');
+        programCards.forEach(card => {
+            // Remove existing event listeners to prevent duplicates
+            card.removeEventListener('click', handleProgramCardClick);
+            card.removeEventListener('touchend', handleProgramCardClick);
+            
+            // Add both click and touch event listeners
+            card.addEventListener('click', handleProgramCardClick);
+            card.addEventListener('touchend', handleProgramCardClick);
+        });
+    }
+
+    // Initialize program cards
+    initProgramCards();
+
     // --- 0. КОНСТАНТЫ И ЭЛЕМЕНТЫ ---
     const navLinks = document.querySelectorAll('.nav-link');
     const pages = document.querySelectorAll('.page');
@@ -74,6 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadCheckboxState();
                 attachCheckboxListeners();
             }
+            
+            // Re-initialize program cards after content is loaded
+            initProgramCards();
 
         } catch (error) {
             console.error("Ошибка при загрузке контента:", error);
